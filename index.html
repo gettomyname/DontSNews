@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приложение</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column; /* Упорядочивание по вертикали */
+        }
+        #home, #news, #about {
+            display: none;
+            text-align: center;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        img {
+            max-width: 100px;  /* Ограничивает ширину изображения */
+            height: auto;      /* Поддерживает пропорции изображения */
+            margin: 10px;      /* Отступ между изображениями */
+        }
+        .header {
+            display: flex;
+            align-items: center; /* Центрирование по вертикали */
+            justify-content: center; /* Центрирование по горизонтали */
+        }
+        .header h1 {
+            margin: 0 20px; /* Отступы вокруг заголовка */
+        }
+    </style>
+</head>
+<body>
+
+<div id="home">
+    <div class="header">
+        <img src="images/1n.png" alt="Изображение 1">
+        <h1>Главная страница</h1>
+        <img src="images/2n.png" alt="Изображение 2">
+    </div>
+    <button id="aboutBtn">О сайте</button>
+    <button id="newsBtn">Новости</button>
+</div>
+
+<div id="news">
+    <h1>Новости</h1>
+    <p id="newsContent"></p>
+    <button id="backToHomeFromNewsBtn">Назад</button>
+</div>
+
+<div id="about">
+    <h1>О сайте</h1>
+    <p>NewReader</p>
+    <p>OpenSource</p>
+    <button id="backToHomeFromAboutBtn">Назад</button>
+</div>
+
+<script>
+    // Показать главную страницу при загрузке
+    document.getElementById('home').style.display = 'block';
+
+    // Обработчики событий для кнопок
+    document.getElementById('aboutBtn').addEventListener('click', function() {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('about').style.display = 'block';
+    });
+
+    document.getElementById('newsBtn').addEventListener('click', function() {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('news').style.display = 'block';
+        loadNews();  // Загружаем новости
+    });
+
+    document.getElementById('backToHomeFromNewsBtn').addEventListener('click', function() {
+        document.getElementById('news').style.display = 'none';
+        document.getElementById('home').style.display = 'block';
+    });
+
+    document.getElementById('backToHomeFromAboutBtn').addEventListener('click', function() {
+        document.getElementById('about').style.display = 'none';
+        document.getElementById('home').style.display = 'block';
+    });
+
+    // Функция для загрузки новостей
+    function loadNews() {
+        const news = [
+            { "title": "New 1", "content": "ABABA 32 RELEASED" },
+            { "title": "New 2", "content": "ABABA 33 RELEASED" },
+            { "title": "New 3", "content": "ABABA 34 RELEASED" }
+        ];
+
+        const newsContent = document.getElementById('newsContent');
+        newsContent.innerText = '';  // Очищаем содержимое
+        news.forEach(newsItem => {
+            newsContent.innerText += `${newsItem.title}. ${newsItem.content}\n`;
+        });
+    }
+</script>
+
+</body>
+</html>
