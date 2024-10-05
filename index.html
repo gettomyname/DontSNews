@@ -14,7 +14,7 @@
             margin: 0;
             flex-direction: column; /* Упорядочивание по вертикали */
         }
-        #home, #news, #about {
+        #home, #news, #about, #merch {
             display: none;
             text-align: center;
         }
@@ -28,13 +28,12 @@
             height: auto;      /* Поддерживает пропорции изображения */
             margin: 10px;      /* Отступ между изображениями */
         }
-        .header {
-            display: flex;
-            align-items: center; /* Центрирование по вертикали */
-            justify-content: center; /* Центрирование по горизонтали */
+        #merch img {
+            max-width: 300px; /* Увеличить размер изображения мерча */
         }
-        .header h1 {
-            margin: 0 20px; /* Отступы вокруг заголовка */
+        .merch-description {
+            font-size: 18px; /* Размер шрифта для описания */
+            margin-top: 10px; /* Отступ сверху */
         }
     </style>
 </head>
@@ -42,12 +41,15 @@
 
 <div id="home">
     <div class="header">
-        <img src="images/1n.png" alt="Изображение 1">
-        <h1>Главная страница</h1>
-        <img src="images/2n.png" alt="Изображение 2">
+        <img src="images/1n.png" alt="Изображение 1"> <!-- Изображение перед заголовком -->
+    </div>
+    <h1>Главная страница</h1> <!-- Заголовок отдельно -->
+    <div class="header">
+        <img src="images/2n.png" alt="Изображение 2"> <!-- Изображение после заголовка -->
     </div>
     <button id="aboutBtn">О сайте</button>
     <button id="newsBtn">Новости</button>
+    <button id="merchBtn">МЕРЧ</button> <!-- Добавлено -->
 </div>
 
 <div id="news">
@@ -61,7 +63,13 @@
     <p>NewReader</p>
     <p>OpenSource</p>
     <button id="backToHomeFromAboutBtn">Назад</button>
-    <p style="margin-top: 20px;">Site using: UAWI 1.2<br>UserAtlanticWebInterface</p>
+</div>
+
+<div id="merch">
+    <h1>МЕРЧ</h1>
+    <img src="images/mr00ss.png" alt="Мерч">
+    <p class="merch-description">ИСЛЁС ЭФЭМИОС ЗАПУСТИЛ СВОЙ МЕРЧ! +7 708 707 54 24!</p> <!-- Добавленный текст -->
+    <button id="backToHomeFromMerchBtn">Назад</button> <!-- Кнопка для возврата -->
 </div>
 
 <script>
@@ -80,6 +88,11 @@
         loadNews();  // Загружаем новости
     });
 
+    document.getElementById('merchBtn').addEventListener('click', function() {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('merch').style.display = 'block'; // Показать мерч
+    });
+
     document.getElementById('backToHomeFromNewsBtn').addEventListener('click', function() {
         document.getElementById('news').style.display = 'none';
         document.getElementById('home').style.display = 'block';
@@ -90,13 +103,18 @@
         document.getElementById('home').style.display = 'block';
     });
 
+    document.getElementById('backToHomeFromMerchBtn').addEventListener('click', function() {
+        document.getElementById('merch').style.display = 'none';
+        document.getElementById('home').style.display = 'block';
+    });
+
     // Функция для загрузки новостей
     function loadNews() {
         const news = [
-            { "title": "New 1", "content": ":::Site-Released::: 32 RELEASED" },
-            { "title": "New 2", "content": ":::Site-Released::: 33 RELEASED" },
-            { "title": "New 3", "content": ":::Site-Released::: 34 RELEASED" },
-            { "title": "New 4", "content": ":::Site-Released::: 35 RELEASED" }
+            { "title": "New 1", "content": "ABABA 32 RELEASED" },
+            { "title": "New 2", "content": "ABABA 33 RELEASED" },
+            { "title": "New 3", "content": "ABABA 34 RELEASED" },
+            { "title": "New 4", "content": "ISLOS EFEMIOS! МЕРЧ" }
         ];
 
         const newsContent = document.getElementById('newsContent');
